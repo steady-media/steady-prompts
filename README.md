@@ -1,0 +1,39 @@
+# Steady prompt set
+
+Twelve questions about your membership numbers on [Steady](https://steadyhq.com), written out as prompts for AI assistants such as Claude or ChatGPT. They work with the Steady connector.
+
+Version 0.2, 5 October 2026. This is a test version.
+
+- **Deutsch:** [steady-prompt-set-de.md](steady-prompt-set-de.md)
+- **English:** [steady-prompt-set-en.md](steady-prompt-set-en.md)
+
+## How to use it
+
+1. Connect your publication to your assistant with the Steady connector. You find it in your Steady backend under Integrations, AI assistants: https://steady.page/de/backend/publications/default/integrations/ai_assistants
+2. Open the file in your language.
+3. Copy the prompt "Where do I start?" into a new chat.
+
+For better answers, create a project in Claude or ChatGPT and paste "Part A: Standing rules" into the project's instructions. After that, a short question such as "How's it going?" is enough.
+
+The assistant only reads your numbers. It changes nothing in Steady.
+
+## The twelve questions
+
+| No. | Question | Frage |
+| --- | --- | --- |
+| 1 | Where do I start? | Wo fange ich an? |
+| 2 | How's it going? | Wie läuft’s? |
+| 3 | Fewer joining or more leaving? | Kommen weniger oder gehen mehr? |
+| 4 | When do I lose members? | Wann verliere ich Mitglieder? |
+| 5 | Where will I be in a year? | Wo stehe ich in einem Jahr? |
+| 6 | What did the campaign bring? | Was hat die Kampagne gebracht? |
+| 7 | Do they stay? | Bleiben sie? |
+| 8 | Is that a lot or a little? | Ist das viel oder wenig? |
+| 9 | Should I change my price? | Soll ich meinen Preis ändern? |
+| 10 | The numbers for pros | Die Zahlen für Profis |
+| 11 | The dashboard | Das Dashboard |
+| 12 | The full analysis | Die volle Analyse |
+
+## If an answer looks wrong
+
+Write to support@steadyhq.com. Say which question you asked, which assistant you used, what you expected and what you got. A screenshot helps.
