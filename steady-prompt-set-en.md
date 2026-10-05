@@ -10,7 +10,7 @@ The assistant only reads your numbers. It changes nothing in Steady.
 
 ## Before you start
 
-Connect your publication to your assistant with the Steady connector. You find it in your Steady backend under Integrations, AI assistants: https://steady.page/de/backend/publications/default/integrations/ai_assistants
+Connect your publication to your assistant with the Steady connector. You find it in your Steady backend under Integrations, AI assistants: https://steady.page/backend/publications/default/integrations/ai_assistants
 
 ## Three ways to use this file
 
@@ -358,3 +358,7 @@ Three things to keep in mind:
 
 - 0.2, 5 October 2026: six more questions (Part C). An overview table. Every prompt now asks for plain sentences.
 - 0.1, 2 October 2026: first version for test users.
+
+## Licence
+
+© 2026 Steady Media GmbH. These prompts are licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). You may copy, change and share them, also commercially, if you name Steady as the source.

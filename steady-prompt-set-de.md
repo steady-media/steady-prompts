@@ -10,7 +10,7 @@ Der Assistent liest deine Zahlen nur. Er ändert nichts bei Steady.
 
 ## Bevor du anfängst
 
-Verbinde deine Publikation über den Steady-Connector mit deinem Assistenten. Du findest ihn in deinem Steady-Backend unter Integrationen, KI-Assistenten: https://steady.page/de/backend/publications/default/integrations/ai_assistants
+Verbinde deine Publikation über den Steady-Connector mit deinem Assistenten. Du findest ihn in deinem Steady-Backend unter Integrationen, KI-Assistenten: https://steady.page/backend/publications/default/integrations/ai_assistants
 
 ## Drei Wege, diese Datei zu nutzen
 
@@ -358,3 +358,7 @@ Drei Dinge solltest du wissen:
 
 – 0.2, 5. Oktober 2026: sechs weitere Fragen (Teil C). Eine Übersichtstabelle. Jeder Prompt verlangt jetzt einfache Sätze.
 – 0.1, 2. Oktober 2026: erste Version für Testnutzer:innen.
+
+## Lizenz
+
+© 2026 Steady Media GmbH. Diese Prompts stehen unter der Lizenz [Creative Commons Namensnennung 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.de). Du darfst sie kopieren, ändern und weitergeben, auch kommerziell, wenn du Steady als Quelle nennst.

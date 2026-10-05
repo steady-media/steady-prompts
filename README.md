@@ -9,7 +9,7 @@ Version 0.2, 5 October 2026. This is a test version.
 
 ## How to use it
 
-1. Connect your publication to your assistant with the Steady connector. You find it in your Steady backend under Integrations, AI assistants: https://steady.page/de/backend/publications/default/integrations/ai_assistants
+1. Connect your publication to your assistant with the Steady connector. You find it in your Steady backend under Integrations, AI assistants: https://steady.page/backend/publications/default/integrations/ai_assistants
 2. Open the file in your language.
 3. Copy the prompt "Where do I start?" into a new chat.
 
@@ -37,3 +37,7 @@ The assistant only reads your numbers. It changes nothing in Steady.
 ## If an answer looks wrong
 
 Write to support@steadyhq.com. Say which question you asked, which assistant you used, what you expected and what you got. A screenshot helps.
+
+## Licence
+
+© 2026 Steady Media GmbH. The prompts are licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). You may copy, change and share them, also commercially, if you name Steady as the source. The full text is in the file [LICENSE](LICENSE).
