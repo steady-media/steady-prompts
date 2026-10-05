@@ -344,7 +344,9 @@ Then write a memo: the diagnosis in three sentences, each with a number; ten fin
 
 ## If an answer looks wrong
 
-Write to support@steadyhq.com. These four things help most:
+The Steady connector has a feedback tool. Tell your assistant in the same chat: "Send this to Steady as feedback: [what was wrong]." The assistant then writes a short report and sends it to our developers. Steady sees which publication the report comes from. Nothing changes in your publication. You get no reply to this feedback.
+
+If you want a reply, write to support@steadyhq.com. These four things help most:
 
 - which question you asked, and the version at the top of this file
 - which assistant you used (Claude or ChatGPT)
@@ -359,7 +361,7 @@ Three things to keep in mind:
 
 ## Changes
 
-- 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?".
+- 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?". Feedback can also go through the feedback tool of the connector.
 - 0.2, 5 October 2026: six more questions (Part C). An overview table. Every prompt now asks for plain sentences.
 - 0.1, 2 October 2026: first version for test users.
 

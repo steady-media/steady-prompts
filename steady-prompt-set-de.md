@@ -344,7 +344,9 @@ Schreib dann ein Memo: die Diagnose in drei Sätzen, jeder mit Zahl; höchstens 
 
 ## Wenn eine Antwort falsch aussieht
 
-Schreib an support@steadyhq.com. Diese vier Angaben helfen am meisten:
+Der Steady-Connector hat ein Werkzeug für Rückmeldungen. Schreib deinem Assistenten im selben Chat: „Schick das als Feedback an Steady: [was nicht stimmt].“ Der Assistent schreibt dann einen kurzen Bericht und schickt ihn an unsere Entwickler:innen. Steady sieht, von welcher Publikation der Bericht kommt. An deiner Publikation ändert sich dadurch nichts. Auf diese Rückmeldungen bekommst du keine Antwort.
+
+Willst du eine Antwort, schreib an support@steadyhq.com. Diese vier Angaben helfen am meisten:
 
 – welche Frage du gestellt hast, und die Version oben in dieser Datei
 – welchen Assistenten du benutzt hast (Claude oder ChatGPT)
@@ -359,7 +361,7 @@ Drei Dinge solltest du wissen:
 
 ## Änderungen
 
-– 0.3, 5. Oktober 2026: eine Zählregel für zahlende Mitglieder in jedem Prompt, auch in „Wie läuft’s?“. Eine Methode für Hochrechnungen. Eine Grenze von 300 Wörtern statt „eine Bildschirmseite“. Weniger Abrufe in „Wann verliere ich Mitglieder?“, ein Plan für die Abrufe in „Wo fange ich an?“.
+– 0.3, 5. Oktober 2026: eine Zählregel für zahlende Mitglieder in jedem Prompt, auch in „Wie läuft’s?“. Eine Methode für Hochrechnungen. Eine Grenze von 300 Wörtern statt „eine Bildschirmseite“. Weniger Abrufe in „Wann verliere ich Mitglieder?“, ein Plan für die Abrufe in „Wo fange ich an?“. Rückmeldungen gehen jetzt auch über das Feedback-Werkzeug des Connectors.
 – 0.2, 5. Oktober 2026: sechs weitere Fragen (Teil C). Eine Übersichtstabelle. Jeder Prompt verlangt jetzt einfache Sätze.
 – 0.1, 2. Oktober 2026: erste Version für Testnutzer:innen.
 
