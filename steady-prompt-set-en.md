@@ -1,6 +1,6 @@
 # Steady prompt set
 
-Version 0.2, 5 October 2026. For test users of the Steady connector.
+Version 0.3, 5 October 2026. For test users of the Steady connector.
 
 ## What this is
 
@@ -11,6 +11,8 @@ The assistant only reads your numbers. It changes nothing in Steady.
 ## Before you start
 
 Connect your publication to your assistant with the Steady connector. You find it in your Steady backend under Integrations, AI assistants: https://steady.page/backend/publications/default/integrations/ai_assistants
+
+Choose the strongest model your assistant offers. In our tests, small and fast models counted paying members wrong.
 
 ## Three ways to use this file
 
@@ -45,25 +47,26 @@ Paste this once into the instructions of a project. Every answer in that project
 You help a media maker understand the membership numbers of their publication on Steady. They are a journalist, podcaster or newsletter writer, not a business analyst. Read the numbers through the Steady connector. Change nothing in Steady.
 
 DATA RULES
-1. Paying members come first. The total in the Steady dashboard also counts guests (people who read through someone else's membership and pay nothing themselves) and members who came through a bundle. Take paying members, guests and external members from total_by_type in get_key_statistics. Say "paying members", never just "members". Explain the difference to the dashboard number once.
-2. The time series count all member types together. To separate paying members from guests, pull daily data for members and for revenue over the same days. On a day on which revenue rose, some joins are paying: divide the new monthly revenue by 5 euros and round. Count that many, but never more than the joins of that day and never fewer than one. A single join worth 50 euros or more a month is one package. A day with joins and no new revenue counts as guests. Use the same rule for cancellations and lost revenue. For the number of paying members on an earlier date, count back from today's number. Say once that this split is an estimate.
+1. Paying members come first. The total in the Steady dashboard also counts guests (people who read through someone else's membership and pay nothing themselves) and members who came through a bundle. Take paying members, guests and external members from total_by_type in get_key_statistics. Say "paying members", never just "members". Explain the difference to the dashboard number once. The fields annual_billed and monthly_billed also count guests; do not present them as paying members.
+2. The time series count all member types together. To separate paying members from guests, pull daily data for members and for revenue over the same days. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. Count that many joins as paying, but never more than the joins of that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. A single join worth 50 euros or more a month is one package. A day with joins and no new revenue counts as guests. Use the same rule for cancellations and lost revenue. For the number of paying members on an earlier date, count back from today's number. For counting back you may read the days of the current month; do not compare them. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan.
 3. Monthly and yearly values for "new" and "lost" are net: a person who joins and leaves in the same month disappears from them. For new members and cancellations, add up daily values. Use monthly and yearly values for totals only.
 4. Ask for at most 365 days of daily data in one call. Never ask for dates before the publication was created. A call with period=all returns yearly values and the creation date in period.start. A comparison with a year ago needs two calls per series.
 5. Leave the current month out of every comparison, because it is not finished. Judge the last completed month.
 6. The churn rate from get_churn_rate counts all member types, so it is too low for paying members. If you need the churn rate of paying members, compute it with rule 2.
 7. Amounts arrive in cents. Show euros.
-8. Do every calculation in code, not in your head. If two numbers contradict each other, say so in one sentence and report it with submit_feedback.
+8. Do every calculation in code, not in your head. Results from Steady do not reach your code by themselves: copy the days with a change into the code, and check your copy against the totals at the end of each month. If two numbers contradict each other, say so in one sentence and report it with submit_feedback.
 9. Say what the data cannot show: who the members are, why they leave, where they come from. Do not guess.
 10. Free readers are in free_members in get_key_statistics. They signed up without paying and are not part of the dashboard total. The numbers for the last 30 days there reach into the current month.
 11. Use as few calls as the question needs. Call get_churn_rate and get_trial_members only when the question is about the churn rate or about trial memberships.
+12. For a look ahead, take the last six completed months: the average number of new paying members per month, and the share of paying members who cancel per month. Carry both forward month by month. Call the result a projection, not a forecast, and give a range.
 
 HOW TO ANSWER
-- First sentence: the answer, with a number and a comparison. Compare with the same month a year ago. If the publication is younger than that, compare with the month before.
+- First sentence: the answer, with a number and one comparison, in 30 words or fewer. Compare with the same period a year ago: the same month, the same 12 months or the same days. If the publication is younger than that, compare with the period before.
 - Give the direction in plain words: up, down or level.
 - Then one graphic that shows this sentence.
 - Then three short parts with these headings: What happened? Why? What can I do this week? Under "Why?", say what the numbers show about the cause, such as fewer new members or more cancellations. If they show no cause, say so. Under the last heading, name one action, with a number.
 - End with "I can't see this in your data: ..." and one question to ask next.
-- One screen of text at most.
+- 300 words at most, not counting the graphic.
 
 LANGUAGE
 - Answer in the language the person writes in. In German use "Du" and gender with a colon (Leser:innen).
@@ -96,11 +99,11 @@ Start with the one thing I probably do not know yet. Check this first: my Steady
 
 Then show four more findings. Each gets one sentence with a number, one small chart, and the question I should ask next:
 - my monthly revenue over the last 13 completed months
-- new paying members and cancellations in the last 12 completed months. Use daily data for this, because monthly values hide people who join and leave in the same month. Count paying members only. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing.
+- new paying members and cancellations in the last 12 completed months. Use daily data for this, because monthly values hide people who join and leave in the same month. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan.
 - the calendar months in which most of my revenue started. Yearly memberships renew in the month they started, so these are my renewal months.
 - my free readers, and how many of them started paying
 
-Give no advice yet. End with the three questions that matter most for my numbers. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Use six calls to Steady at most.
+Give no advice yet. End with the three questions that matter most for my numbers. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Use eight calls to Steady at most; a call that fails does not count. Start with the numbers of today and with yearly values over my whole history: they also show the date on which my publication was created. Never ask for a date before that. Ask for at most 365 days of daily data per call.
 ```
 
 **You get:** One page: one fact you may not know, four more findings with a chart each, and three questions to continue with.
@@ -114,9 +117,9 @@ Give no advice yet. End with the three questions that matter most for my numbers
 ```text
 Use the Steady connector and tell me how my publication is doing.
 
-I want to know three things: how many members really pay (my dashboard total also counts guests, who pay nothing), what I earn per month, and how both compare with the month before and with the same month a year ago. Leave out the current month, because it is not finished. Stay with these three things; other findings belong to the other questions.
+I want to know three things: how many members really pay (my dashboard total also counts guests, who pay nothing), what I earn per month, and how both compare with the month before and with the same month a year ago. Leave out the current month, because it is not finished. For the paying members of earlier months, use daily data for members and for revenue for the last 13 months up to today, at most 365 days per call. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan. Stay with these three things; other findings belong to the other questions.
 
-Answer in this order: one sentence with the number; one chart of my monthly revenue over the last 13 completed months; what happened; why; one thing I can do this week. Then tell me what my data cannot show, and which question I should ask next. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Keep the answer to one screen.
+Answer in this order: one sentence with the number; one chart of my monthly revenue over the last 13 completed months; what happened; why (say only what the numbers show, such as fewer new paying members or more cancellations; if they show no cause, say so and do not guess); one thing I can do this week. Then tell me what my data cannot show, and which question I should ask next. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Write 300 words at most, not counting the chart.
 ```
 
 **You get:** Paying members, monthly revenue, the direction, and one thing to do.
@@ -130,9 +133,9 @@ Answer in this order: one sentence with the number; one chart of my monthly reve
 ```text
 Use the Steady connector. My paying members or my revenue are not growing. Find out which of two things changed: do fewer people join, or do more people cancel?
 
-Use daily data for members and for revenue, because monthly values hide people who join and leave in the same month. Ask for one year of daily data per call. Count paying members only. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. Compare the last 12 completed months with the 12 months before. If I have 100 or more paying members, also show it month by month.
+Use daily data for members and for revenue, because monthly values hide people who join and leave in the same month. Ask for one year of daily data per call. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan. Compare the last 12 completed months with the 12 months before. If I have 100 or more paying members, also show it month by month.
 
-Start with one sentence that names the side that changed, with both numbers for both periods. Draw one chart: new paying members up, cancellations down. Then name one thing I can do this week. Tell me what my data cannot show. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Keep the answer to one screen.
+Start with one sentence that names the side that changed, with both numbers for both periods. Draw one chart: new paying members up, cancellations down. Then name one thing I can do this week. Tell me what my data cannot show. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Write 300 words at most, not counting the chart.
 ```
 
 **You get:** Which of the two sides changed, with the numbers for this year and the year before.
@@ -146,11 +149,11 @@ Start with one sentence that names the side that changed, with both numbers for 
 ```text
 Use the Steady connector. In which months do most of my paying members cancel, and which dates in the next 12 months matter for my revenue?
 
-Use daily data for members and for revenue over my whole history, one year per call. Count paying members only. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. Add up the cancellations by calendar month over the last 24 completed months. For each month with many cancellations, check if a lot of revenue started in the same calendar month of an earlier year. Yearly memberships renew in the month they started, and that is when people cancel.
+Use daily data for members and for revenue for the last 24 completed months and the days of the current month, at most 365 days per call. For the years before, use monthly revenue over my whole history; one call is enough for that. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan. Add up the cancellations by calendar month over the last 24 completed months. For each month with many cancellations, check if a lot of revenue started in the same calendar month of an earlier year. Yearly memberships renew in the month they started, and that is when people cancel.
 
 Also look for one membership or package that alone brings 10 percent or more of my monthly revenue. Tell me when it started and when it will probably renew.
 
-Start with one sentence. Draw twelve columns, January to December, and a time line of the dates ahead. Then name one thing I can do four weeks before the next date. Tell me what my data cannot show. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Keep the answer to one screen.
+Start with one sentence. Draw twelve columns, January to December, and a time line of the dates ahead. Then name one thing I can do four weeks before the next date. Tell me what my data cannot show. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Write 300 words at most, not counting the chart.
 ```
 
 **You get:** The months with many cancellations, the reason if the data shows one, and the dates ahead.
@@ -164,11 +167,11 @@ Start with one sentence. Draw twelve columns, January to December, and a time li
 ```text
 Use the Steady connector. If nothing changes, how many paying members will I have in a year?
 
-Take the last six completed months from daily data: the average number of new paying members per month, and the share of paying members who cancel per month. Count paying members only. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. Carry both forward for twelve months. Call the result a projection, not a forecast: it is a calculation and knows nothing about campaigns, price changes or seasons. Give a range. Also tell me the number at which as many people join as leave.
+Take the last six completed months from daily data: the average number of new paying members per month, and the share of paying members who cancel per month. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan. Carry both forward for twelve months. Call the result a projection, not a forecast: it is a calculation and knows nothing about campaigns, price changes or seasons. Give a range. Also tell me the number at which as many people join as leave.
 
 My target is [number] paying members in twelve months. Tell me how many new paying members I need per month for that, and how many more that is than today. If I gave no number, ask me for one.
 
-Start with one sentence. Draw one line: the past solid, the projection dashed. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Keep the answer to one screen.
+Start with one sentence. Draw one line: the past solid, the projection dashed. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Write 300 words at most, not counting the chart.
 ```
 
 **You get:** A projection for twelve months, and how many new paying members a month your target needs.
@@ -182,9 +185,9 @@ Start with one sentence. Draw one line: the past solid, the projection dashed. E
 ```text
 Use the Steady connector. I ran [a campaign / a membership call / an offer] from [date] to [date]. What did it bring?
 
-Use daily data for members and for revenue from 14 days before the start to 14 days after the end. Count new paying members per day. Count paying members only. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. Compare the campaign days with the usual number per day. If I offer trial memberships, show how many trials started and how many became paying members. Trials that have not ended yet cannot have converted, so say which numbers are still open. Also show how many free readers signed up.
+Use daily data for members and for revenue from 14 days before the start to 14 days after the end. Count new paying members per day. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan. Compare the campaign days with the usual number per day. Usual means the 14 days before and the 14 days after, taken together. If I offer trial memberships, show how many trials started and how many became paying members. Trials that have not ended yet cannot have converted, so say which numbers are still open. Steady shows free readers for the last 30 days only. If the campaign ended earlier, say that you cannot show how many free readers signed up.
 
-Start with one sentence: how many more paying members joined than in a normal period of the same length. Draw new paying members per day, with the campaign days marked. Tell me what my data cannot show, for example if these members will stay. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Keep the answer to one screen.
+Start with one sentence: how many more paying members joined than in a normal period of the same length. Draw new paying members per day, with the campaign days marked. Tell me what my data cannot show, for example if these members will stay. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Write 300 words at most, not counting the chart.
 ```
 
 **You get:** What the campaign added above a normal period.
@@ -206,7 +209,7 @@ First check if the connector has a tool that follows members by the month in whi
 
 If the connector has no such tool: say so in two sentences and do not estimate a number. Show me this as the nearest thing: in which calendar months most of my revenue started, and in which most was lost, over my whole history. Yearly memberships renew in the month they started.
 
-Start with one sentence. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Keep the answer to one screen.
+Start with one sentence. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Write 300 words at most, not counting the chart.
 ```
 
 **You get:** Today: an honest "not yet visible", plus your renewal months. Later, once Steady delivers the data: how many of 100 stay.
@@ -229,9 +232,9 @@ If it has no such tool: say in one sentence that a comparison with other publica
 - revenue per paying member
 - the share of members who pay once a year (today only)
 
-Use daily data for new members and cancellations, one year per call. Count paying members only. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing.
+Use daily data for new members and cancellations, one year per call. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan.
 
-Start with one sentence. Draw one chart with the five numbers. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Keep the answer to one screen.
+Start with one sentence. Draw one chart with the five numbers. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Write 300 words at most, not counting the chart.
 ```
 
 **You get:** Today: a comparison with your own last year. Later: a comparison with similar publications.
@@ -247,11 +250,11 @@ Use the Steady connector. I am thinking about raising my price by [percent]. Do 
 
 Compute the threshold: if the price rises by p percent, at most 1 − 1 ÷ (1 + p) of the affected members may cancel before I earn less than today. At 20 percent that is about 17 of 100. If I named no percentage, compute it for 10, 20 and 50 percent.
 
-Put next to it how many of 100 paying members cancel in a normal month. Take that from daily data for the last 12 completed months. Count paying members only. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing.
+Put next to it how many of 100 paying members cancel in a normal month. Take that from daily data for the last 12 completed months. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan.
 
 Show my monthly revenue today, and after the increase if nobody cancels. The connector does not show my plans and prices, and it cannot show what an earlier price change did; say that.
 
-Start with one sentence. Draw two bars for the revenue, and one dot per paying member with the threshold marked. Tell me what my data cannot show: how many would leave because of an increase. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Keep the answer to one screen.
+Start with one sentence. Draw two bars for the revenue, and one dot per paying member with the threshold marked. Tell me what my data cannot show: how many would leave because of an increase. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon. Write 300 words at most, not counting the chart.
 ```
 
 **You get:** How many members may cancel before a higher price brings in less. No price recommendation.
@@ -276,7 +279,7 @@ One row per metric. Columns: the last completed month, the same month a year ear
 - quick ratio: new revenue ÷ lost revenue over 12 months
 - the share of members who pay once a year
 
-Use daily data for new members and cancellations, one year per call, because monthly values are net. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. Leave out the current month. Label every row as "paying members" or "all member types" and never mix the two. New revenue includes upgrades and lost revenue includes downgrades, so say that these cannot be separated.
+Use daily data for new members and cancellations, one year per call, because monthly values are net. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan. Leave out the current month. Label every row as "paying members" or "all member types" and never mix the two. New revenue includes upgrades and lost revenue includes downgrades, so say that these cannot be separated.
 
 Start with one sentence on the most important change. End with three sentences on what matters most. Give no recommendation, because this table gets passed on.
 ```
@@ -304,9 +307,9 @@ Above the charts: the situation in one sentence, and the three numbers behind it
 9. members who pay yearly against members who pay monthly
 10. revenue per paying member, last 24 months
 11. trial memberships and how many became paying members, only if I have trials
-12. a projection for the next 12 months if nothing changes
+12. a projection for the next 12 months if nothing changes: carry forward the average number of new paying members per month and the share of paying members who cancel per month, both from the last six completed months
 
-Use daily data for members and for revenue, one year per call. Count paying members only. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. Leave out the current month.
+Use daily data for members and for revenue, one year per call. Count paying members only. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan. Leave out the current month.
 
 Every chart gets a title that states its finding as a sentence with a number, and a subtitle with what is measured, the unit and the period. One accent colour, everything else grey. No legends: label lines and bars directly. Horizontal gridlines only. Under every chart a small grey source line with the date.
 
@@ -326,11 +329,11 @@ Use the Steady connector and analyse the whole history of my publication. This t
 
 Step 1, pull the data: the numbers of today; yearly values; monthly values since the start; daily data for members and for revenue for every year, one year per call. Check that the daily values add up to the totals, and tell me where they do not.
 
-Step 2, compute: paying members and guests for every day of the history. On a day with new revenue, divide the new monthly revenue by 5 euros and round: that many joins are paying, but never more than joined on that day and never fewer than one. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. Then monthly revenue, new paying members and cancellations per month, the churn rate of paying members, revenue per paying member, and the dates on which I reached 100, 250, 500 and 1,000 paying members.
+Step 2, compute: paying members and guests for every day of the history. Steady's member numbers over time count paying members and guests together, so split them like this. Take today's paying members from the key statistics: the number of paid members, not the total. For each day: if new monthly revenue came in and at least one person joined, divide the new monthly revenue by 5 euros and round to the nearest whole number. That many joins are paying, but never more than joined on that day and never fewer than one. If new revenue came in and nobody joined, count no join: it is a price change. Do the same for cancellations with the lost monthly revenue. Joins or cancellations on a day without such revenue are guests, who pay nothing. For paying members on an earlier date, count back from today's number. Do the counting in code. Say once that this split is an estimate. If a join and a cancellation with revenue fall on the same day, say that this can be one person changing plan. Then monthly revenue, new paying members and cancellations per month, the churn rate of paying members, revenue per paying member, and the dates on which I reached 100, 250, 500 and 1,000 paying members.
 
 Step 3, look for patterns: calendar months and weekdays with many joins or many cancellations; single days with unusually many joins or one large payment, with their dates; what was left of each such peak three, six and twelve months later.
 
-Step 4, project twelve months ahead: if nothing changes; with 20 percent more new paying members; with a churn rate one percentage point lower.
+Step 4, project twelve months ahead from the last six completed months (the average number of new paying members per month, and the share of paying members who cancel per month): if nothing changes; with 20 percent more new paying members; with a churn rate one percentage point lower.
 
 Then write a memo: the diagnosis in three sentences, each with a number; ten findings at most, sorted by importance, each with a number and a chart; the decisions I have to take, each with its effect in members and in euros, and a date. If this app can make files, add a spreadsheet with the data and the calculations. Tell me what the data cannot show. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon.
 ```
@@ -356,6 +359,7 @@ Three things to keep in mind:
 
 ## Changes
 
+- 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?".
 - 0.2, 5 October 2026: six more questions (Part C). An overview table. Every prompt now asks for plain sentences.
 - 0.1, 2 October 2026: first version for test users.
 

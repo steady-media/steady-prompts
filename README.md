@@ -2,7 +2,7 @@
 
 Twelve questions about your membership numbers on [Steady](https://steadyhq.com), written out as prompts for AI assistants such as Claude or ChatGPT. They work with the Steady connector.
 
-Version 0.2, 5 October 2026. This is a test version.
+Version 0.3, 5 October 2026. This is a test version.
 
 - **Deutsch:** [steady-prompt-set-de.md](steady-prompt-set-de.md)
 - **English:** [steady-prompt-set-en.md](steady-prompt-set-en.md)
@@ -12,6 +12,8 @@ Version 0.2, 5 October 2026. This is a test version.
 1. Connect your publication to your assistant with the Steady connector. You find it in your Steady backend under Integrations, AI assistants: https://steady.page/backend/publications/default/integrations/ai_assistants
 2. Open the file in your language.
 3. Copy the prompt "Where do I start?" into a new chat.
+
+Choose the strongest model your assistant offers. In our tests, small and fast models counted paying members wrong.
 
 For better answers, create a project in Claude or ChatGPT and paste "Part A: Standing rules" into the project's instructions. After that, a short question such as "How's it going?" is enough.
 
@@ -37,6 +39,10 @@ The assistant only reads your numbers. It changes nothing in Steady.
 ## If an answer looks wrong
 
 Write to support@steadyhq.com. Say which question you asked, which assistant you used, what you expected and what you got. A screenshot helps.
+
+## Changes
+
+- 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?".
 
 ## Licence
 
