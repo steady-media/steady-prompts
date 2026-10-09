@@ -487,7 +487,7 @@ Four things to keep in mind:
 
 ## Changes
 
-- 0.4, 9 October 2026: Steady now splits member numbers into paying members, guests and bundle members over time, so the estimate from daily revenue is gone. Monthly values in place of daily ones, and fewer calls. Four new questions about posts, the newsletter, free readers and topics (Part D); question 16 builds on a prompt published by mtarnovan (https://gist.github.com/mtarnovan/54bab1b81dcd51abc1c05dcbbf3662fb). Free readers over time in questions 1, 6, 10, 11 and 12. Revenue split into new memberships, upgrades, price increases, ended memberships and downgrades. One method for the range of a projection. The meaning of "usual" for a campaign in Part A.
+- 0.4, 9 October 2026: Steady now splits member numbers into paying members, guests and bundle members over time, so the estimate from daily revenue is gone. Monthly values in place of daily ones, and fewer calls. Four new questions about posts, the newsletter, free readers and topics (Part D). Free readers over time in questions 1, 6, 10, 11 and 12. Revenue split into new memberships, upgrades, price increases, ended memberships and downgrades. One method for the range of a projection. The meaning of "usual" for a campaign in Part A.
 - 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?". Feedback can also go through the feedback tool of the connector.
 - 0.2, 5 October 2026: six more questions (Part C). An overview table. Every prompt now asks for plain sentences.
 - 0.1, 2 October 2026: first version for test users.
