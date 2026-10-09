@@ -1,6 +1,6 @@
 # Steady Prompt-Set
 
-Version 0.4, 9. Oktober 2026. Für Testnutzer:innen des Steady-Connectors.
+Version 0.5, 9. Oktober 2026. Für Testnutzer:innen des Steady-Connectors.
 
 ## Was das ist
 
@@ -36,7 +36,7 @@ Der dritte Weg gibt die besten Antworten.
 | 8 | Ist das viel oder wenig? | Wenn du wissen willst, wie deine Zahlen im Vergleich stehen. |
 | 9 | Soll ich meinen Preis ändern? | Bevor du einen Preis erhöhst oder einen Rabatt beendest. |
 | 10 | Die Zahlen für Profis | Wenn Steuerberatung, Bank oder ein Beirat nach Kennzahlen fragt. |
-| 11 | Das Dashboard | Wenn du alle Grafiken auf einer Seite willst, für ein Treffen oder den Jahresrückblick. |
+| 11 | Das Dashboard | Wenn du alle Zahlen auf einer Seite willst, die du jede Woche wieder öffnest, oder für ein Treffen oder den Jahresrückblick. |
 | 12 | Die volle Analyse | Einmal im Jahr oder vor einer großen Entscheidung. Sie dauert mehrere Minuten und braucht viele Abrufe. |
 | 13 | Welche Beiträge bringen Mitglieder? | Wenn du wissen willst, nach welchen Beiträgen sich Menschen angemeldet haben. |
 | 14 | Wie kommt mein Newsletter an? | Alle paar Monate oder nachdem du deinen Newsletter geändert hast. |
@@ -303,33 +303,37 @@ Beginne mit einem Satz zur wichtigsten Veränderung. Schließe mit drei Sätzen 
 
 ### 11. Das Dashboard
 
-**Wann:** Wenn du alle Grafiken auf einer Seite willst, für ein Treffen oder den Jahresrückblick.
+**Wann:** Wenn du alle Zahlen auf einer Seite willst, die du jede Woche wieder öffnest, oder für ein Treffen oder den Jahresrückblick.
 
 ```text
-Nutze den Steady-Connector und baue ein Dashboard meiner Publikation auf einer Seite. Kann diese App eine interaktive Seite bauen, nutze das.
+Nutze den Steady-Connector und baue ein Dashboard meiner Publikation. Kann diese App ein Live-Dashboard bauen, das meine Zahlen bei jedem Öffnen neu holt (in Claude: ein Artifact vom Typ „Dashboard“), baue das: Speichere jeden Abruf des Connectors als Live-Abfrage, damit die Seite meine eigene Steady-Verbindung nutzt und nie eine Kopie meiner Zahlen enthält. Kann sie das nicht, baue eine interaktive Seite mit den Zahlen von heute und sag mir in einem Satz, dass sie sich nicht selbst aktualisiert.
 
-Über den Grafiken: die Lage in einem Satz und die drei Zahlen dahinter. Dann höchstens zwölf Grafiken, eine pro Zeile:
-1. die Dashboard-Zahl, aufgeteilt in zahlende Mitglieder und Gäste
-2. Monatsumsatz, letzte 36 abgeschlossene Monate
-3. neue zahlende Mitglieder und Kündigungen pro Monat, letzte 24 Monate
-4. zahlende Mitglieder im Zeitverlauf
-5. die Kündigungsrate der zahlenden Mitglieder pro Monat und die Kündigungsrate aller Mitgliedstypen in Grau
-6. neue zahlende Mitglieder nach Kalendermonat
-7. Kündigungen nach Kalendermonat
-8. kostenlose Leser:innen pro Monat und wie viele von ihnen Mitglied wurden
-9. der Anteil des Monatsumsatzes aus Jahres- und aus Monatsmitgliedschaften, heute
-10. Umsatz pro zahlendem Mitglied, letzte 24 Monate
-11. die zehn Beiträge mit den meisten neuen Mitgliedern in den letzten 12 abgeschlossenen Monaten. Steady rechnet ein neues Mitglied einem Beitrag nur zu, wenn es der letzte Beitrag war, den die Person vor der Anmeldung gelesen hat; schreib das unter die Grafik.
-12. eine Hochrechnung für die nächsten 12 Monate, falls sich nichts ändert: Schreib die durchschnittliche Zahl neuer zahlender Mitglieder pro Monat und den Anteil der zahlenden Mitglieder, die pro Monat kündigen, fort, beides aus den letzten sechs abgeschlossenen Monaten. Für die Spanne rechne zweimal weiter: mit den drei Monaten mit den wenigsten neuen zahlenden Mitgliedern und den drei mit dem höchsten Anteil an Kündigungen, und mit den drei besten Monaten von beidem.
+Oben: die Lage in einem Satz und drei Zahlen mit demselben Monat ein Jahr zuvor: zahlende Mitglieder, Monatsumsatz, kostenlose Leser:innen. Ein Schalter für den Zeitraum der Verläufe: 12, 24, 36 Monate oder alles. Dann höchstens zwölf Grafiken, in drei Abschnitten:
+Zahlende Mitglieder
+1. zahlende Mitglieder und Gäste am Ende jedes Monats
+2. neue zahlende Mitglieder (nach oben) und beendete Mitgliedschaften (nach unten) pro Monat
+3. die Kündigungsrate der zahlenden Mitglieder pro Monat und die Kündigungsrate aller Mitgliedstypen in Grau
+4. beendete Mitgliedschaften nach Kalendermonat, letzte 24 abgeschlossene Monate
+Umsatz
+5. Monatsumsatz am Ende jedes Monats
+6. die Veränderung des Monatsumsatzes in den letzten 12 abgeschlossenen Monaten, nach Art: neue Mitgliedschaften, Upgrades, Preiserhöhungen, Downgrades, beendete Mitgliedschaften
+7. Umsatz pro zahlendem Mitglied, und im Titel der Anteil des Monatsumsatzes aus Jahresmitgliedschaften heute
+Leser:innen, Beiträge und Newsletter
+8. kostenlose Leser:innen am Ende jedes Monats, mit einem Punkt für jeden Monat, in dem einige von ihnen Mitglied wurden
+9. die Öffnungsrate jedes Newsletters der letzten 12 abgeschlossenen Monate, mit dem Median, und der Median des Jahres davor. Lass Versände mit weniger als 100 Zustellungen weg.
+10. eine Tabelle der Beiträge der letzten 12 abgeschlossenen Monate, denen Steady neue Mitglieder zurechnet, mit neuen zahlenden Mitgliedern, neuen kostenlosen Leser:innen und Besucher:innen. Steady rechnet ein neues Mitglied einem Beitrag nur zu, wenn es der letzte Beitrag war, den die Person vor der Anmeldung gesehen hat; schreib das unter die Tabelle.
+Ausblick
+11. eine Hochrechnung für die nächsten 12 Monate, falls sich nichts ändert: Schreib die durchschnittliche Zahl neuer zahlender Mitglieder pro Monat und den Anteil der zahlenden Mitglieder, die pro Monat kündigen, fort, beides aus den letzten sechs abgeschlossenen Monaten. Für die Spanne rechne zweimal weiter: mit den drei Monaten mit den wenigsten neuen zahlenden Mitgliedern und den drei mit dem höchsten Anteil an Kündigungen, und mit den drei besten Monaten von beidem.
+12. eine kurze Liste, was diese Zahlen nicht zeigen: wer die Mitglieder sind und warum sie gehen, wann jemand gekündigt hat, was nach Steuern und Gebühren ankommt.
 
-Habe ich Probemitgliedschaften, zeig sie in Grafik 3. Nutze Monatswerte über meine ganze Geschichte für Mitglieder, Umsatz, Kündigungsrate und kostenlose Leser:innen (je ein Abruf, mit period all) und die Liste meiner Beiträge. Zähle nur zahlende Mitglieder: Steady teilt seine Mitgliederzahlen nach Typ auf, nimm also den Typ paid, nicht die Gesamtzahl. Lass den laufenden Monat weg.
+Nutze Monatswerte über meine ganze Geschichte für Mitglieder, Umsatz, Kündigungsrate und kostenlose Leser:innen (je ein Abruf, mit period all), die Zahlen von heute und meine 100 neuesten Beiträge. Zähle nur zahlende Mitglieder: Steady teilt seine Mitgliederzahlen nach Typ auf, nimm also den Typ paid, nicht die Gesamtzahl. Lass den laufenden Monat aus jedem Vergleich heraus. Habe ich Probemitgliedschaften, sag das. Ist meine Publikation jünger als 13 Monate, lass die Vergleiche mit dem Vorjahr leer und sag, warum.
 
 Jede Grafik bekommt einen Titel, der ihr Ergebnis als Satz mit Zahl nennt, und einen Untertitel mit dem, was gemessen wird, Einheit und Zeitraum. Eine Akzentfarbe, alles andere grau. Keine Legenden: Linien und Balken direkt beschriften. Nur waagerechte Hilfslinien. Unter jeder Grafik eine kleine graue Quellenzeile mit Datum.
 
-Schreib im Chat fünf Sätze: die fünf Titel, die am meisten zählen. Erkläre jeden Fachbegriff, wenn du ihn zum ersten Mal benutzt. Schreib kurze, einfache Sätze, ohne Metaphern und ohne Wirtschaftsjargon. Sprich mich mit du an und gendere mit Doppelpunkt (Leser:innen).
+Bevor du es übergibst, rechne die Zahlen oben selbst aus den Abrufen nach und prüfe, dass das Dashboard dieselben zeigt. Schreib im Chat fünf Sätze: die fünf Titel, die am meisten zählen. Sag mir dann, ob sich die Seite selbst aktualisiert und dass sie privat bleibt, bis ich sie teile. Erkläre jeden Fachbegriff, wenn du ihn zum ersten Mal benutzt. Schreib kurze, einfache Sätze, ohne Metaphern und ohne Wirtschaftsjargon. Sprich mich mit du an und gendere mit Doppelpunkt (Leser:innen).
 ```
 
-**Du bekommst:** Eine Seite mit bis zu zwölf Grafiken. Wer nur die Titel liest, kennt die Lage.
+**Du bekommst:** Eine Seite mit bis zu zwölf Grafiken. Wer nur die Titel liest, kennt die Lage. In Claude holt die Seite bei jedem Öffnen frische Zahlen.
 
 **Frag danach:** „Gib mir die volle Analyse.“
 
@@ -487,6 +491,7 @@ Vier Dinge solltest du wissen:
 
 ## Änderungen
 
+– 0.5, 9. Oktober 2026: „Das Dashboard“ baut ein Live-Dashboard, wo die App das kann: in Claude ein Artifact vom Typ „Dashboard“, das bei jedem Öffnen frische Zahlen über deine eigene Steady-Verbindung holt. Neue Grafiken zur Veränderung des Umsatzes nach Art, zur Öffnungsrate des Newsletters und zu den Beiträgen, die Mitglieder gebracht haben, ein Schalter für den Zeitraum und eine Liste, was die Zahlen nicht zeigen.
 – 0.4, 9. Oktober 2026: Steady teilt die Mitgliederzahlen im Zeitverlauf jetzt in zahlende Mitglieder, Gäste und Bundle-Mitglieder auf. Die Schätzung über den Tagesumsatz entfällt. Monatswerte statt Tageswerten, und weniger Abrufe. Vier neue Fragen zu Beiträgen, Newsletter, kostenlosen Leser:innen und Themen (Teil D). Kostenlose Leser:innen im Zeitverlauf in den Fragen 1, 6, 10, 11 und 12. Umsatz aufgeteilt in neue Mitgliedschaften, Upgrades, Preiserhöhungen, beendete Mitgliedschaften und Downgrades. Eine Methode für die Spanne einer Hochrechnung. Die Bedeutung von „üblich“ bei einer Kampagne in Teil A.
 – 0.3, 5. Oktober 2026: eine Zählregel für zahlende Mitglieder in jedem Prompt, auch in „Wie läuft’s?“. Eine Methode für Hochrechnungen. Eine Grenze von 300 Wörtern statt „eine Bildschirmseite“. Weniger Abrufe in „Wann verliere ich Mitglieder?“, ein Plan für die Abrufe in „Wo fange ich an?“. Rückmeldungen gehen jetzt auch über das Feedback-Werkzeug des Connectors.
 – 0.2, 5. Oktober 2026: sechs weitere Fragen (Teil C). Eine Übersichtstabelle. Jeder Prompt verlangt jetzt einfache Sätze.
