@@ -306,7 +306,7 @@ Beginne mit einem Satz zur wichtigsten Veränderung. Schließe mit drei Sätzen 
 **Wann:** Wenn du alle Zahlen auf einer Seite willst, die du jede Woche wieder öffnest, oder für ein Treffen oder den Jahresrückblick.
 
 ```text
-Nutze den Steady-Connector und baue ein Dashboard meiner Publikation. Kann diese App ein Live-Dashboard bauen, das meine Zahlen bei jedem Öffnen neu holt (in Claude: ein Artifact vom Typ „Dashboard“), baue das: Speichere jeden Abruf des Connectors als Live-Abfrage, damit die Seite meine eigene Steady-Verbindung nutzt und nie eine Kopie meiner Zahlen enthält. Kann sie das nicht, baue eine interaktive Seite mit den Zahlen von heute und sag mir in einem Satz, dass sie sich nicht selbst aktualisiert.
+Nutze den Steady-Connector und baue ein Dashboard meiner Publikation. Kann diese App ein Live-Dashboard bauen, das meine Zahlen bei jedem Öffnen neu holt (in Claude: ein Artifact vom Typ „Dashboard“), baue das: Speichere jeden Abruf des Connectors als Live-Abfrage, damit die Seite meine eigene Steady-Verbindung nutzt. Bitte mich dann, sie einmal zu öffnen. Laden die Live-Abfragen auf der Seite nicht, leg stattdessen die Zahlen von heute ins Dashboard und sag mir, dass es sich nicht mehr selbst aktualisiert und dass alle, mit denen ich es teile, diese Zahlen sehen. Kann diese App gar kein Live-Dashboard bauen, baue eine interaktive Seite mit den Zahlen von heute und sag mir in einem Satz, dass sie sich nicht selbst aktualisiert.
 
 Oben: die Lage in einem Satz und drei Zahlen mit demselben Monat ein Jahr zuvor: zahlende Mitglieder, Monatsumsatz, kostenlose Leser:innen. Ein Schalter für den Zeitraum der Verläufe: 12, 24, 36 Monate oder alles. Dann höchstens zwölf Grafiken, in drei Abschnitten:
 Zahlende Mitglieder
@@ -333,7 +333,7 @@ Jede Grafik bekommt einen Titel, der ihr Ergebnis als Satz mit Zahl nennt, und e
 Bevor du es übergibst, rechne die Zahlen oben selbst aus den Abrufen nach und prüfe, dass das Dashboard dieselben zeigt. Schreib im Chat fünf Sätze: die fünf Titel, die am meisten zählen. Sag mir dann, ob sich die Seite selbst aktualisiert und dass sie privat bleibt, bis ich sie teile. Erkläre jeden Fachbegriff, wenn du ihn zum ersten Mal benutzt. Schreib kurze, einfache Sätze, ohne Metaphern und ohne Wirtschaftsjargon. Sprich mich mit du an und gendere mit Doppelpunkt (Leser:innen).
 ```
 
-**Du bekommst:** Eine Seite mit bis zu zwölf Grafiken. Wer nur die Titel liest, kennt die Lage. In Claude holt die Seite bei jedem Öffnen frische Zahlen.
+**Du bekommst:** Eine Seite mit bis zu zwölf Grafiken. Wer nur die Titel liest, kennt die Lage. In Claude holt die Seite bei jedem Öffnen frische Zahlen, wenn sie den Steady-Connector erreicht; sonst zeigt sie die Zahlen vom Tag, an dem sie gebaut wurde.
 
 **Frag danach:** „Gib mir die volle Analyse.“
 
@@ -491,7 +491,7 @@ Vier Dinge solltest du wissen:
 
 ## Änderungen
 
-– 0.5, 9. Oktober 2026: „Das Dashboard“ baut ein Live-Dashboard, wo die App das kann: in Claude ein Artifact vom Typ „Dashboard“, das bei jedem Öffnen frische Zahlen über deine eigene Steady-Verbindung holt. Neue Grafiken zur Veränderung des Umsatzes nach Art, zur Öffnungsrate des Newsletters und zu den Beiträgen, die Mitglieder gebracht haben, ein Schalter für den Zeitraum und eine Liste, was die Zahlen nicht zeigen.
+– 0.5, 9. Oktober 2026: „Das Dashboard“ baut ein Live-Dashboard, wo die App das kann: in Claude ein Artifact vom Typ „Dashboard“, das bei jedem Öffnen frische Zahlen über deine eigene Steady-Verbindung holt. Erreicht die Seite den Connector nicht, zeigt sie die Zahlen vom Tag, an dem sie gebaut wurde. Neue Grafiken zur Veränderung des Umsatzes nach Art, zur Öffnungsrate des Newsletters und zu den Beiträgen, die Mitglieder gebracht haben, ein Schalter für den Zeitraum und eine Liste, was die Zahlen nicht zeigen.
 – 0.4, 9. Oktober 2026: Steady teilt die Mitgliederzahlen im Zeitverlauf jetzt in zahlende Mitglieder, Gäste und Bundle-Mitglieder auf. Die Schätzung über den Tagesumsatz entfällt. Monatswerte statt Tageswerten, und weniger Abrufe. Vier neue Fragen zu Beiträgen, Newsletter, kostenlosen Leser:innen und Themen (Teil D). Kostenlose Leser:innen im Zeitverlauf in den Fragen 1, 6, 10, 11 und 12. Umsatz aufgeteilt in neue Mitgliedschaften, Upgrades, Preiserhöhungen, beendete Mitgliedschaften und Downgrades. Eine Methode für die Spanne einer Hochrechnung. Die Bedeutung von „üblich“ bei einer Kampagne in Teil A.
 – 0.3, 5. Oktober 2026: eine Zählregel für zahlende Mitglieder in jedem Prompt, auch in „Wie läuft’s?“. Eine Methode für Hochrechnungen. Eine Grenze von 300 Wörtern statt „eine Bildschirmseite“. Weniger Abrufe in „Wann verliere ich Mitglieder?“, ein Plan für die Abrufe in „Wo fange ich an?“. Rückmeldungen gehen jetzt auch über das Feedback-Werkzeug des Connectors.
 – 0.2, 5. Oktober 2026: sechs weitere Fragen (Teil C). Eine Übersichtstabelle. Jeder Prompt verlangt jetzt einfache Sätze.

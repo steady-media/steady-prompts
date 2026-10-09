@@ -306,7 +306,7 @@ Start with one sentence on the most important change. End with three sentences o
 **When:** When you want all your numbers on one page that you open again every week, or for a meeting or a yearly review.
 
 ```text
-Use the Steady connector and build a dashboard of my publication. If this app can make a live dashboard that fetches my numbers again each time I open it (in Claude: an artifact of the type "Dashboard"), build that: store each connector call as a live query, so the page uses my own Steady connection and never contains a copy of my numbers. If it cannot, build one interactive page with the numbers of today, and tell me in one sentence that it will not update itself.
+Use the Steady connector and build a dashboard of my publication. If this app can make a live dashboard that fetches my numbers again each time I open it (in Claude: an artifact of the type "Dashboard"), build that: store each connector call as a live query, so the page uses my own Steady connection. Then ask me to open it once. If the live queries do not load on the page, put today's numbers into the dashboard instead, and tell me that it no longer updates itself and that everyone I share it with sees these numbers. If this app cannot make a live dashboard at all, build one interactive page with the numbers of today, and tell me in one sentence that it will not update itself.
 
 At the top: the situation in one sentence, and three numbers with the same month a year ago: paying members, monthly revenue, free readers. A switch for the period of the charts over time: 12, 24, 36 months or everything. Then twelve charts at most, in three sections:
 Paying members
@@ -333,7 +333,7 @@ Every chart gets a title that states its finding as a sentence with a number, an
 Before you hand it over, compute the numbers at the top yourself from the calls and check that the dashboard shows the same. In the chat, write five sentences: the five titles that matter most. Then tell me if the page updates itself, and that it stays private until I share it. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon.
 ```
 
-**You get:** One page with up to twelve charts. Whoever reads only the titles knows the situation. In Claude, the page fetches fresh numbers each time you open it.
+**You get:** One page with up to twelve charts. Whoever reads only the titles knows the situation. In Claude, the page fetches fresh numbers each time you open it, if it can reach the Steady connector; otherwise it shows the numbers of the day it was built.
 
 **Ask next:** "Give me the full analysis."
 
@@ -491,7 +491,7 @@ Four things to keep in mind:
 
 ## Changes
 
-- 0.5, 9 October 2026: "The dashboard" builds a live dashboard where the app can: in Claude, an artifact of the type "Dashboard" that fetches fresh numbers through your own Steady connection each time you open it. New charts for the change in revenue by kind, the newsletter open rate and the posts that brought members, a switch for the period, and a list of what the numbers do not show.
+- 0.5, 9 October 2026: "The dashboard" builds a live dashboard where the app can: in Claude, an artifact of the type "Dashboard" that fetches fresh numbers through your own Steady connection each time you open it. If the page cannot reach the connector, it shows the numbers of the day it was built. New charts for the change in revenue by kind, the newsletter open rate and the posts that brought members, a switch for the period, and a list of what the numbers do not show.
 - 0.4, 9 October 2026: Steady now splits member numbers into paying members, guests and bundle members over time, so the estimate from daily revenue is gone. Monthly values in place of daily ones, and fewer calls. Four new questions about posts, the newsletter, free readers and topics (Part D). Free readers over time in questions 1, 6, 10, 11 and 12. Revenue split into new memberships, upgrades, price increases, ended memberships and downgrades. One method for the range of a projection. The meaning of "usual" for a campaign in Part A.
 - 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?". Feedback can also go through the feedback tool of the connector.
 - 0.2, 5 October 2026: six more questions (Part C). An overview table. Every prompt now asks for plain sentences.
