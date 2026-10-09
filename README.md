@@ -2,7 +2,7 @@
 
 Sixteen questions about your membership numbers, posts and readers on [Steady](https://steadyhq.com), written out as prompts for AI assistants such as Claude or ChatGPT. They work with the Steady connector.
 
-Version 0.4, 9 October 2026. This is a test version.
+Version 0.5, 9 October 2026. This is a test version.
 
 - **Deutsch:** [steady-prompt-set-de.md](steady-prompt-set-de.md)
 - **English:** [steady-prompt-set-en.md](steady-prompt-set-en.md)
@@ -48,6 +48,7 @@ If you want a reply, write to support@steadyhq.com. Say which question you asked
 
 ## Changes
 
+- 0.5, 9 October 2026: "The dashboard" builds a live dashboard where the app can: in Claude, an artifact of the type "Dashboard" that fetches fresh numbers through your own Steady connection each time you open it. If the page cannot reach the connector, it shows the numbers of the day it was built. New charts for the change in revenue by kind, the newsletter open rate and the posts that brought members.
 - 0.4, 9 October 2026: Steady now splits member numbers into paying members, guests and bundle members over time, so the estimate from daily revenue is gone. Monthly values in place of daily ones, and fewer calls. Four new questions about posts, the newsletter, free readers and topics. Free readers over time, and revenue split into new memberships, upgrades, price increases, ended memberships and downgrades.
 - 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?". Feedback can also go through the feedback tool of the connector.
 

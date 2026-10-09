@@ -1,6 +1,6 @@
 # Steady prompt set
 
-Version 0.4, 9 October 2026. For test users of the Steady connector.
+Version 0.5, 9 October 2026. For test users of the Steady connector.
 
 ## What this is
 
@@ -36,7 +36,7 @@ The third way gives the best answers.
 | 8 | Is that a lot or a little? | When you want to know how your numbers compare. |
 | 9 | Should I change my price? | Before you raise a price or end a discount. |
 | 10 | The numbers for pros | When an accountant, a bank or a board asks for metrics. |
-| 11 | The dashboard | When you want all the charts on one page, for a meeting or a yearly review. |
+| 11 | The dashboard | When you want all your numbers on one page that you open again every week, or for a meeting or a yearly review. |
 | 12 | The full analysis | Once a year, or before a big decision. It takes several minutes and many calls. |
 | 13 | Which posts bring members? | When you want to know which of your posts led people to sign up. |
 | 14 | How is my newsletter doing? | Every few months, or after you changed your newsletter. |
@@ -303,33 +303,37 @@ Start with one sentence on the most important change. End with three sentences o
 
 ### 11. The dashboard
 
-**When:** When you want all the charts on one page, for a meeting or a yearly review.
+**When:** When you want all your numbers on one page that you open again every week, or for a meeting or a yearly review.
 
 ```text
-Use the Steady connector and build a dashboard of my publication on one page. If this app can make an interactive page, use that.
+Use the Steady connector and build a dashboard of my publication. If this app can make a live dashboard that fetches my numbers again each time I open it (in Claude: an artifact of the type "Dashboard"), build that: store each connector call as a live query, so the page uses my own Steady connection. Then ask me to open it once. If the live queries do not load on the page, put today's numbers into the dashboard instead, and tell me that it no longer updates itself and that everyone I share it with sees these numbers. If this app cannot make a live dashboard at all, build one interactive page with the numbers of today, and tell me in one sentence that it will not update itself.
 
-Above the charts: the situation in one sentence, and the three numbers behind it. Then twelve charts at most, one per row:
-1. the dashboard total, split into paying members and guests
-2. monthly revenue, last 36 completed months
-3. new paying members and cancellations per month, last 24 months
-4. paying members over time
-5. the churn rate of paying members per month, and the churn rate of all member types in grey
-6. new paying members by calendar month
-7. cancellations by calendar month
-8. free readers per month, and how many of them became members
-9. the share of monthly revenue from yearly and from monthly memberships, today
-10. revenue per paying member, last 24 months
-11. the ten posts with the most new members in the last 12 completed months. Steady counts a new member for a post only if it was the last post the person read before signing up; say so under the chart.
-12. a projection for the next 12 months if nothing changes: carry forward the average number of new paying members per month and the share of paying members who cancel per month, both from the last six completed months. For the range, do it twice more: with the three months with the fewest new paying members and the three with the highest share of cancellations, and with the three best months of each.
+At the top: the situation in one sentence, and three numbers with the same month a year ago: paying members, monthly revenue, free readers. A switch for the period of the charts over time: 12, 24, 36 months or everything. Then twelve charts at most, in three sections:
+Paying members
+1. paying members and guests at the end of each month
+2. new paying members (up) and ended memberships (down) per month
+3. the churn rate of paying members per month, and the churn rate of all member types in grey
+4. ended memberships by calendar month, last 24 completed months
+Revenue
+5. monthly revenue at the end of each month
+6. the change in monthly revenue in the last 12 completed months, by kind: new memberships, upgrades, price increases, downgrades, ended memberships
+7. revenue per paying member, and in the title the share of monthly revenue from yearly memberships today
+Readers, posts and newsletter
+8. free readers at the end of each month, with a dot for each month in which some of them became members
+9. the open rate of each newsletter in the last 12 completed months, with the median, and the median of the year before. Leave out sends with fewer than 100 deliveries.
+10. a table of the posts of the last 12 completed months to which Steady attributes new members, with new paying members, new free readers and visitors. Steady counts a new member for a post only if it was the last post the person saw before signing up; say so under the table.
+Outlook
+11. a projection for the next 12 months if nothing changes: carry forward the average number of new paying members per month and the share of paying members who cancel per month, both from the last six completed months. For the range, do it twice more: with the three months with the fewest new paying members and the three with the highest share of cancellations, and with the three best months of each.
+12. a short list of what these numbers do not show: who the members are and why they leave, when someone cancelled, what arrives after taxes and fees.
 
-If I have trial memberships, show them in chart 3. Use monthly values over my whole history for members, revenue, churn rate and free readers (one call each, with period all), and the list of my posts. Count paying members only: Steady splits its member numbers by type, so use the type paid, not the total. Leave out the current month.
+Use monthly values over my whole history for members, revenue, churn rate and free readers (one call each, with period all), the numbers of today, and my 100 newest posts. Count paying members only: Steady splits its member numbers by type, so use the type paid, not the total. Leave out the current month from every comparison. If I have trial memberships, say so. If my publication is younger than 13 months, leave the comparisons with a year ago empty and say why.
 
 Every chart gets a title that states its finding as a sentence with a number, and a subtitle with what is measured, the unit and the period. One accent colour, everything else grey. No legends: label lines and bars directly. Horizontal gridlines only. Under every chart a small grey source line with the date.
 
-In the chat, write five sentences: the five titles that matter most. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon.
+Before you hand it over, compute the numbers at the top yourself from the calls and check that the dashboard shows the same. In the chat, write five sentences: the five titles that matter most. Then tell me if the page updates itself, and that it stays private until I share it. Explain every technical term the first time you use it. Write short, plain sentences, without metaphors or business jargon.
 ```
 
-**You get:** One page with up to twelve charts. Whoever reads only the titles knows the situation.
+**You get:** One page with up to twelve charts. Whoever reads only the titles knows the situation. In Claude, the page fetches fresh numbers each time you open it, if it can reach the Steady connector; otherwise it shows the numbers of the day it was built.
 
 **Ask next:** "Give me the full analysis."
 
@@ -487,6 +491,7 @@ Four things to keep in mind:
 
 ## Changes
 
+- 0.5, 9 October 2026: "The dashboard" builds a live dashboard where the app can: in Claude, an artifact of the type "Dashboard" that fetches fresh numbers through your own Steady connection each time you open it. If the page cannot reach the connector, it shows the numbers of the day it was built. New charts for the change in revenue by kind, the newsletter open rate and the posts that brought members, a switch for the period, and a list of what the numbers do not show.
 - 0.4, 9 October 2026: Steady now splits member numbers into paying members, guests and bundle members over time, so the estimate from daily revenue is gone. Monthly values in place of daily ones, and fewer calls. Four new questions about posts, the newsletter, free readers and topics (Part D). Free readers over time in questions 1, 6, 10, 11 and 12. Revenue split into new memberships, upgrades, price increases, ended memberships and downgrades. One method for the range of a projection. The meaning of "usual" for a campaign in Part A.
 - 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?". Feedback can also go through the feedback tool of the connector.
 - 0.2, 5 October 2026: six more questions (Part C). An overview table. Every prompt now asks for plain sentences.
