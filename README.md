@@ -1,8 +1,8 @@
 # Steady prompt set
 
-Twelve questions about your membership numbers on [Steady](https://steadyhq.com), written out as prompts for AI assistants such as Claude or ChatGPT. They work with the Steady connector.
+Sixteen questions about your membership numbers, posts and readers on [Steady](https://steadyhq.com), written out as prompts for AI assistants such as Claude or ChatGPT. They work with the Steady connector.
 
-Version 0.3, 5 October 2026. This is a test version.
+Version 0.4, 9 October 2026. This is a test version.
 
 - **Deutsch:** [steady-prompt-set-de.md](steady-prompt-set-de.md)
 - **English:** [steady-prompt-set-en.md](steady-prompt-set-en.md)
@@ -13,13 +13,13 @@ Version 0.3, 5 October 2026. This is a test version.
 2. Open the file in your language.
 3. Copy the prompt "Where do I start?" into a new chat.
 
-Choose the strongest model your assistant offers. In our tests, small and fast models counted paying members wrong.
+Choose the strongest model your assistant offers. Small and fast models make more mistakes with numbers.
 
 For better answers, create a project in Claude or ChatGPT and paste "Part A: Standing rules" into the project's instructions. After that, a short question such as "How's it going?" is enough.
 
 The assistant only reads your numbers. It changes nothing in Steady.
 
-## The twelve questions
+## The sixteen questions
 
 | No. | Question | Frage |
 | --- | --- | --- |
@@ -35,6 +35,10 @@ The assistant only reads your numbers. It changes nothing in Steady.
 | 10 | The numbers for pros | Die Zahlen für Profis |
 | 11 | The dashboard | Das Dashboard |
 | 12 | The full analysis | Die volle Analyse |
+| 13 | Which posts bring members? | Welche Beiträge bringen Mitglieder? |
+| 14 | How is my newsletter doing? | Wie kommt mein Newsletter an? |
+| 15 | Do free readers start paying? | Werden kostenlose Leser:innen zu Zahlenden? |
+| 16 | Which topics work? | Welche Themen wirken? |
 
 ## If an answer looks wrong
 
@@ -44,6 +48,7 @@ If you want a reply, write to support@steadyhq.com. Say which question you asked
 
 ## Changes
 
+- 0.4, 9 October 2026: Steady now splits member numbers into paying members, guests and bundle members over time, so the estimate from daily revenue is gone. Monthly values in place of daily ones, and fewer calls. Four new questions about posts, the newsletter, free readers and topics; question 16 builds on a prompt published by mtarnovan (https://gist.github.com/mtarnovan/54bab1b81dcd51abc1c05dcbbf3662fb). Free readers over time, and revenue split into new memberships, upgrades, price increases, ended memberships and downgrades.
 - 0.3, 5 October 2026: one counting rule for paying members in every prompt, also in "How's it going?". One method for projections. A limit of 300 words in place of "one screen". Fewer calls in "When do I lose members?", a plan for the calls in "Where do I start?". Feedback can also go through the feedback tool of the connector.
 
 ## Licence
